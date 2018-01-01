@@ -2,11 +2,13 @@ const express=require('express');
 const hbs=require('hbs');
 const path = require('path');
 const fs=require('fs');
+const port=process.env.PORT || 3000;
 
 var app=express();
 console.log();
 app.set('view engine',hbs);
 //app.use('/static',express.static(path.join(__dirname ,'public')));
+
 
 hbs.registerPartials(__dirname+'/views/partials/');
 hbs.registerHelper('getCurrentYear',()=>{
@@ -24,9 +26,9 @@ app.use((req,res,next)=>{
 	next();
 });
 
-app.use((req,res,next) =>{
+/*app.use((req,res,next) =>{
 	res.render('maintainence.hbs');
-});
+});*/
 
 app.get('/',(req,res)=>{
 	res.render('home.hbs',{
@@ -44,6 +46,6 @@ app.get('/help',(req,res)=>{
 	res.send("HZzxzxc");
 });
 
-app.listen(3000,()=>{
-    console.log("Server is up..");
+app.listen(port,()=>{
+    console.log("Server is up on " + port + " ...");
 });
